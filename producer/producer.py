@@ -12,7 +12,7 @@ def __id_generator__(size=6, chars=string.ascii_uppercase + string.digits + stri
 
 
 def generate_random_1000_transaction_data(data_obj):
-    for _ in range(0,1):
+    for _ in range(0,100):
         transaction = Transaction()
         transaction.transaction_id = __id_generator__()
         transaction.account_number = random.randint(1, 50)
@@ -41,3 +41,4 @@ for _ in range(10000):
     print(details)
     data = details.encode_to_bytes()
     producer.send('mytopic', value=data)
+    sleep(1)
