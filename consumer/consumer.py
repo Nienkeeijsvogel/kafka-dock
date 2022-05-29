@@ -20,13 +20,23 @@ class Details(Message):
 details = Details()
 
 
+
+total = 0
+count = 0
 #listener
 for message in consumer:
     message = message.value
     details.parse_from_bytes(message)
     for d in details.data:
-        date_prod = (datetime.datetime.strptime(d.transaction_datetime,"%Y-%m-%dT%H:%M:%S.%f"))
+        try:
+            date_prod = (datetime.datetime.strptime(d.transaction_datetime,"%Y-%m-%dT%H:%M:%S.%f"))
+        except:
+            continue
         datetime_cons = datetime.datetime.now()
-        difference = datetime_cons - date_prod
+                difference = datetime_cons - date_prod
         elem = str(difference).split(':')[2]
-        print(elem)
+        total = total + float(elem)
+        count = count + 1
+    if count==1000:
+        break
+print(total/count)
