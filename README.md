@@ -2,7 +2,7 @@
 git clone https://github.com/Nienkeeijsvogel/kafka-dock
 
 terminal 1:  
-cd zookeeper-kafka. 
+cd zookeeper-kafka <br />
 chmod u+x startzk.sh. 
 ./startzk.sh. 
 
