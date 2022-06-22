@@ -47,6 +47,7 @@ kubectl config set-context $(kubectl config current-context) --namespace=kube-sy
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm install kafka-local bitnami/kafka --set persistence.enabled=false,zookeeper.persistence.enabled=false --set replicaCount=3
 kubectl taint nodes $(hostname) node-role.kubernetes.io/master-
-kubectl run producer --image neijsvogel/prod:allbrokers --namespace kube-system --command python3 /code/producer.py
-kubectl run consumer --image neijsvogel/consumer:allbrokers --namespace kube-system --command python3 /code/consumer.py
+kubectl run consumer --image neijsvogel/kafka:consumerch --namespace kube-system --command python3 /code/consumer.py 
+kubectl wait --for=condition=Ready pod/consumer
+kubectl run producer --image neijsvogel/kafka:prod --namespace kube-system --command python3 /code/producer.py
 kubectl logs --selector=run=consumer --tail 5
