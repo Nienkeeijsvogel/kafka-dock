@@ -93,7 +93,7 @@ spec:
         - containerPort: 22181
         - containerPort: 29092
     - name: producer
-      image: neijsvogel/producer:localh
+      image: neijsvogel/producer:mes10
       ports:
         - containerPort: 29092
     - name: consumer
