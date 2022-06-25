@@ -49,5 +49,5 @@ helm install kafka-local bitnami/kafka --set persistence.enabled=false,zookeeper
 kubectl taint nodes $(hostname) node-role.kubernetes.io/master-
 kubectl run consumer --image neijsvogel/kafka:consumerch --namespace kube-system --command python3 /code/consumer.py 
 kubectl wait --for=condition=Ready pod/consumer
-kubectl run producer --image neijsvogel/kafka:prod --namespace kube-system --command python3 /code/producer.py
+kubectl run producer --image neijsvogel/kafka:producerch --namespace kube-system --command python3 /code/producer.py
 kubectl logs --selector=run=consumer --tail 5
