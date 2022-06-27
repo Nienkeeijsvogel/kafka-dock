@@ -19,10 +19,8 @@ class Details(Message):
     data = MessageField(field_number=1, repeated=True, message_cls=Transaction)
 details = Details()
 
-
-
-total = 0
-count = 0
+total,count=0,0
+border=1000
 #listener
 for message in consumer:
     message = message.value
@@ -33,10 +31,10 @@ for message in consumer:
         except:
             continue
         datetime_cons = datetime.datetime.now()
-                difference = datetime_cons - date_prod
+        difference = datetime_cons - date_prod
         elem = str(difference).split(':')[2]
         total = total + float(elem)
         count = count + 1
-    if count==1000:
-        break
-print(total/count)
+    if count==border:
+        print(total/count)
+        border=border*2
